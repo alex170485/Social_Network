@@ -16,7 +16,6 @@ function App() {
                 <Route component={Profile}/>
                 <Route component={Dialogs}/>
             </div>
-
         </div>
     );
 }
