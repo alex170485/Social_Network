@@ -1,12 +1,14 @@
 .navbar {
     grid-area: navbar;
     background-color: cornflowerblue;
+    padding: 20px;
 }
-.item {
-    color: aquamarine;
+a {
+    color: white;
+    text-decoration: none;
 }
 
-.item.active {
+a.activeLink {
     color: gold;
 }
 
