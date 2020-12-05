@@ -8,11 +8,15 @@ import Post from "./Post/Post";
 function MyPosts() {
 
     return (
-        <div>
-            My posts
+        <div className={classes.postBlock}>
+            <h3>My posts </h3>
             <div>
+                <div>
                 <textarea></textarea>
+                </div>
+                <div>
                 <button>Add post</button>
+                </div>
             </div>
             <div className={classes.posts}>
                 <Post message={'How are you?'} likecount = {15}/>
