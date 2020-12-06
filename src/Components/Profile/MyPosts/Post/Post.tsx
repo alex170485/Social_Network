@@ -3,7 +3,8 @@ import classes from './Post.module.css'
 
 type PostPropsType = {
     message: string;
-    likecount: number;
+    likeCount: number;
+    id: number
 }
 
 
@@ -14,7 +15,7 @@ function Post(props: PostPropsType) {
 
             {props.message}
             <div>
-                <span>like {props.likecount}</span>
+                <span>like {props.likeCount}</span>
             </div>
         </div>
 
