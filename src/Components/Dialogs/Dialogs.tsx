@@ -35,24 +35,33 @@ const Dialogs = () => {
         {id: 2, name: 'John'},
         {id: 3, name: 'David'}
     ]
+    /* функиця МАР для отресовки компонетны Диалог*/
+    let dialogDataMap = dialogData.map(dialogsData  => {
+        return (
+            <DialogItem name={dialogsData.name} id={dialogsData.id}/>
+        );
+    });
+
     /* Массив данных для Message*/
     let messagesData = [
         {id: 1, message: 'Hello'},
         {id: 2, message: 'How are you?'},
         {id: 3, message: 'YOYOYOYO'}
     ]
+    /*функция МАР для отрисовки компонетны Message*/
+    let messagesDataMap = messagesData.map(messagesData => {
+        return (
+            <Message message={messagesData.message} id={messagesData.id}/>
+        )
+    })
 
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsItem}>
-                <DialogItem name={dialogData[0].name} id={dialogData[0].id}/>
-                <DialogItem name={dialogData[1].name} id={dialogData[1].id}/>
-                <DialogItem name={dialogData[2].name} id={dialogData[2].id}/>
+                {dialogDataMap}
             </div>
             <div className={style.messages}>
-                <Message message={messagesData[0].message} id = {messagesData[0].id}/>
-                <Message message={messagesData[1].message} id = {messagesData[1].id}/>
-                <Message message={messagesData[2].message} id = {messagesData[2].id}/>
+                {messagesDataMap}
             </div>
         </div>
     )

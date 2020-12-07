@@ -2,19 +2,19 @@ import React from "react";
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
 
-
-
-
 function MyPosts() {
     /*Массив данных для Post*/
     let postData = [
         {id:1, message:'How are you?', likeCount: 15},
         {id:2, message: 'It`s my first post', likeCount: 32}
     ]
+    /*функция МАР для отрисовка компонетны Post*/
 
-
-
-
+    let postDataMap = postData.map(postData => {
+        return (
+            <Post message={postData.message} likeCount={postData.likeCount} id={postData.id} />
+        )
+    })
     return (
         <div className={classes.postBlock}>
             <h3>My posts </h3>
@@ -27,8 +27,7 @@ function MyPosts() {
                 </div>
             </div>
             <div className={classes.posts}>
-                <Post message={postData[0].message} id={postData[0].id} likeCount = {postData[0].likeCount}/>
-                <Post message={postData[1].message} id={postData[1].id} likeCount = {postData[1].likeCount}/>
+                {postDataMap}
             </div>
         </div>
     );
