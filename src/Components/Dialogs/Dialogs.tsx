@@ -1,33 +1,8 @@
 import React from "react";
 import style from '../Dialogs/Dialogs.module.css'
-import {NavLink} from "react-router-dom";
+import DialogItem from "./DialogItem/DialogItem";
+import Message from "./Message/Message";
 
-type DialogItemType = {
-    name: string,
-    id: number,
-}
-/* Компонента для отображения имени юзера*/
-const DialogItem = (props: DialogItemType) => {
-    /*Переменная для конкатенации строк пропс + id*/
-    let path = '/dialogs/' + props.id;
-    return (
-        <div className={style.dialog}>
-            <NavLink to={path}>{props.name}</NavLink>
-        </div>
-    )
-}
-/*Компонента сообщения в диалогах*/
-type MessagePropsType = {
-    message: string;
-    id: number;
-}
-const Message = (props: MessagePropsType) => {
-    return (
-        <div className={style.message}>
-            {props.message}
-        </div>
-    )
-}
 const Dialogs = () => {
     /*Массив данных для компоненты Диалог*/
     let dialogData = [
@@ -36,7 +11,7 @@ const Dialogs = () => {
         {id: 3, name: 'David'}
     ]
     /* функиця МАР для отресовки компонетны Диалог*/
-    let dialogDataMap = dialogData.map(dialogsData  => {
+    let dialogDataMap = dialogData.map(dialogsData => {
         return (
             <DialogItem name={dialogsData.name} id={dialogsData.id}/>
         );
