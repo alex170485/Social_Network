@@ -2,17 +2,21 @@ import React from "react";
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
 
-function MyPosts() {
-    /*Массив данных для Post*/
-    let postData = [
-        {id:1, message:'How are you?', likeCount: 15},
-        {id:2, message: 'It`s my first post', likeCount: 32}
-    ]
-    /*функция МАР для отрисовка компонетны Post*/
+type postDataType = {
+    id: number;
+    message: string;
+    likeCount: number
+}
 
-    let postDataMap = postData.map(postData => {
+type postDataTypeProps = {
+    postDataType: Array<postDataType>
+}
+
+function MyPosts(props:postDataTypeProps) {
+    /*функция МАР для отрисовка компонетны Post*/
+    let postDataMap = props.postDataType.map(postDataProps => {
         return (
-            <Post message={postData.message} likeCount={postData.likeCount} id={postData.id} />
+            <Post message={postDataProps.message} likeCount={postDataProps.likeCount} id={postDataProps.id} />
         )
     })
     return (

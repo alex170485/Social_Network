@@ -3,28 +3,38 @@ import style from '../Dialogs/Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 
-const Dialogs = () => {
+type dialogDataType = {
+    id: number;
+    name: string
+
+}
+
+type messagesDataType = {
+    id: number;
+    message: string
+}
+
+type allDialogPropsType = {
+    dialogDataType: Array<dialogDataType>;
+    messagesDataType: Array<messagesDataType>;
+}
+
+
+
+const Dialogs = (props: allDialogPropsType) => {
     /*Массив данных для компоненты Диалог*/
-    let dialogData = [
-        {id: 1, name: 'Sasha'},
-        {id: 2, name: 'John'},
-        {id: 3, name: 'David'}
-    ]
+
     /* функиця МАР для отресовки компонетны Диалог*/
-    let dialogDataMap = dialogData.map(dialogsData => {
+    let dialogDataMap = props.dialogDataType.map(dialogsData => {
         return (
             <DialogItem name={dialogsData.name} id={dialogsData.id}/>
         );
     });
 
     /* Массив данных для Message*/
-    let messagesData = [
-        {id: 1, message: 'Hello'},
-        {id: 2, message: 'How are you?'},
-        {id: 3, message: 'YOYOYOYO'}
-    ]
+
     /*функция МАР для отрисовки компонетны Message*/
-    let messagesDataMap = messagesData.map(messagesData => {
+    let messagesDataMap = props.messagesDataType.map(messagesData => {
         return (
             <Message message={messagesData.message} id={messagesData.id}/>
         )
