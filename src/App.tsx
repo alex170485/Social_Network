@@ -9,23 +9,8 @@ import Music from "./Components/Music/Music";
 import News from "./Components/News/News";
 import Settings from "./Components/Settings/Settings";
 
-let dialogData = [
-    {id: 1, name: 'Sasha'},
-    {id: 2, name: 'John'},
-    {id: 3, name: 'David'}
-]
-let messagesData = [
-    {id: 1, message: 'Hello'},
-    {id: 2, message: 'How are you?'},
-    {id: 3, message: 'YOYOYOYO'}
-]
 
-let postData = [
-    {id:1, message:'How are you?', likeCount: 15},
-    {id:2, message: 'It`s my first post', likeCount: 32}
-]
-
-function App() {
+function App(props:any) {
     return (
         <BrowserRouter>
             <div className="App-wrapper">
@@ -33,9 +18,9 @@ function App() {
                 <NavBar/>
                 <div className='App-wrapper-content'>
                     {/*изменил метод отрисовки с component на render*/}
-                    <Route render={() => <Profile postDataType={postData}/>} path={'/profile'}/>
-                    <Route render={() => <Dialogs dialogDataType={dialogData}
-                                                  messagesDataType={messagesData}/>}
+                    <Route render={() => <Profile postDataType={props.postData}/>} path={'/profile'}/>
+                    <Route render={() => <Dialogs dialogDataType={props.dialogData}
+                                                  messagesDataType={props.messagesData}/>}
                            path={'/dialogs'}/>
                     <Route render={() => <Music/>} path={'/music'}/>
                     <Route render={() => <News/>} path={'/news'}/>
