@@ -14,6 +14,8 @@ type postDataTypeProps = {
 
 function MyPosts(props:postDataTypeProps) {
     /*функция МАР для отрисовка компонетны Post*/
+
+
     let postDataMap = props.postDataType.map(postDataProps => {
         return (
             <Post message={postDataProps.message} likeCount={postDataProps.likeCount} id={postDataProps.id} />
