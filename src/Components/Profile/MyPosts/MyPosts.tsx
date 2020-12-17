@@ -23,6 +23,7 @@ function MyPosts(props: postDataTypeProps) {
     /*Создаем ссылку на элемент. В Typescript в джинериках указать к какому элименту ОБЯЗАТЕЛЬНО*/
     let newPostElement = React.createRef<HTMLTextAreaElement>();
     /*Создаем функцию колбэк в которую передаем данные полученные из textarea*/
+    /*! после current я так понимаю отрицание*/
     let addPost = () => {
         let text = newPostElement.current!.value;
         alert(text);

@@ -20,7 +20,6 @@ type allDialogPropsType = {
 }
 
 
-
 const Dialogs = (props: allDialogPropsType) => {
     /*Массив данных для компоненты Диалог*/
 
@@ -39,6 +38,12 @@ const Dialogs = (props: allDialogPropsType) => {
             <Message message={messagesData.message} id={messagesData.id}/>
         )
     })
+    let newMessage = React.createRef<HTMLTextAreaElement>();
+    let addNewMessage = () => {
+        let newTextMessage = newMessage.current!.value;
+        alert(newTextMessage);
+    };
+
 
     return (
         <div className={style.dialogs}>
@@ -47,6 +52,10 @@ const Dialogs = (props: allDialogPropsType) => {
             </div>
             <div className={style.messages}>
                 {messagesDataMap}
+            </div>
+            <div>
+                <textarea ref={newMessage}></textarea>
+                <button onClick={addNewMessage}>Push</button>
             </div>
         </div>
     )
