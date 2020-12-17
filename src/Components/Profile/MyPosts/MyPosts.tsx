@@ -2,6 +2,7 @@ import React from "react";
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
 
+
 type postDataType = {
     id: number;
     message: string;
@@ -12,24 +13,30 @@ type postDataTypeProps = {
     postDataType: Array<postDataType>
 }
 
-function MyPosts(props:postDataTypeProps) {
+function MyPosts(props: postDataTypeProps) {
     /*функция МАР для отрисовка компонетны Post*/
-
-
     let postDataMap = props.postDataType.map(postDataProps => {
         return (
-            <Post message={postDataProps.message} likeCount={postDataProps.likeCount} id={postDataProps.id} />
+            <Post message={postDataProps.message} likeCount={postDataProps.likeCount} id={postDataProps.id}/>
         )
     })
+    /*Создаем ссылку на элемент. В Typescript в джинериках указать к какому элименту ОБЯЗАТЕЛЬНО*/
+    let newPostElement = React.createRef<HTMLTextAreaElement>();
+    /*Создаем функцию колбэк в которую передаем данные полученные из textarea*/
+    let addPost = () => {
+        let text = newPostElement.current!.value;
+        alert(text);
+    };
+
     return (
         <div className={classes.postBlock}>
             <h3>My posts </h3>
             <div>
                 <div>
-                <textarea></textarea>
+                    <textarea ref={newPostElement}></textarea>
                 </div>
                 <div>
-                <button>Add post</button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
             <div className={classes.posts}>
