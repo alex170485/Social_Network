@@ -1,3 +1,10 @@
+import {rerenderEntireTree} from "../render";
+
+export type StateType = {
+
+}
+
+
 let state = {
     /*Данные для Profile*/
 
@@ -23,5 +30,19 @@ let state = {
     }
 
 }
+/*Функция добавления поста в state*/
+/*название параметра функции не влияет*/
+ export let addPost = (postMessage: string) => {
+    let newPost = {
+        id:5,
+        message: postMessage,
+        likeCount: 0
+    }
+    state.profilePage.postData.push(newPost);
+    rerenderEntireTree(state);
+}
+
+
+
 
 export default state;

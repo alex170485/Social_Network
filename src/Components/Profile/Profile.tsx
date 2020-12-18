@@ -10,14 +10,19 @@ type postDataType = {
 }
 
 type postDataProps = {
-    postDataType: Array<postDataType>
+    postDataType: Array<postDataType>;
+    addPost:() => void;
 }
 
 function Profile(props: postDataProps) {
+
     return (
         <div className={classes.content}>
             <ProfileInfo />
-            <MyPosts postDataType =  {props.postDataType}/>
+            <MyPosts postDataType =  {props.postDataType}
+                     addPost = {props.addPost}
+
+            />
         </div>
     );
 }

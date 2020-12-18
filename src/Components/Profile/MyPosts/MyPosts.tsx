@@ -6,11 +6,12 @@ import Post from "./Post/Post";
 type postDataType = {
     id: number;
     message: string;
-    likeCount: number
+    likeCount: number;
 }
 
 type postDataTypeProps = {
-    postDataType: Array<postDataType>
+    postDataType: Array<postDataType>;
+    addPost:(arg0: string) => void;
 }
 
 function MyPosts(props: postDataTypeProps) {
@@ -23,10 +24,11 @@ function MyPosts(props: postDataTypeProps) {
     /*Создаем ссылку на элемент. В Typescript в джинериках указать к какому элименту ОБЯЗАТЕЛЬНО*/
     let newPostElement = React.createRef<HTMLTextAreaElement>();
     /*Создаем функцию колбэк в которую передаем данные полученные из textarea*/
-    /*! после current я так понимаю отрицание*/
+    /*! после current это опциональный оператор */
     let addPost = () => {
         let text = newPostElement.current!.value;
-        alert(text);
+        props.addPost(text);
+        newPostElement.current!.value = ''; /*обнуление textarea*/
     };
 
     return (

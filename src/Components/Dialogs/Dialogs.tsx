@@ -38,10 +38,10 @@ const Dialogs = (props: allDialogPropsType) => {
             <Message message={messagesData.message} id={messagesData.id}/>
         )
     })
-    let newMessage = React.createRef<HTMLTextAreaElement>();
-    let addNewMessage = () => {
-        let newTextMessage = newMessage.current!.value;
-        alert(newTextMessage);
+    let newPost = React.createRef<HTMLTextAreaElement>();
+    let addNewPost = () => {
+        let newTextPost = newPost.current!.value;
+        alert(newTextPost);
     };
 
 
@@ -54,8 +54,8 @@ const Dialogs = (props: allDialogPropsType) => {
                 {messagesDataMap}
             </div>
             <div>
-                <textarea ref={newMessage}></textarea>
-                <button onClick={addNewMessage}>Push</button>
+                <textarea ref={newPost}></textarea>
+                <button onClick={addNewPost}>Push</button>
             </div>
         </div>
     )
