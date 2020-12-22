@@ -7,11 +7,16 @@ type postDataType = {
     id: number;
     message: string;
     likeCount: number;
+
+
 }
 
 type postDataTypeProps = {
     postDataType: Array<postDataType>;
-    addPost:(arg0: string) => void;
+    addPost:() => void;
+    updateNewPostText:(arg0:string)=> void;
+    newPostText: string;
+
 }
 
 function MyPosts(props: postDataTypeProps) {
@@ -26,17 +31,23 @@ function MyPosts(props: postDataTypeProps) {
     /*Создаем функцию колбэк в которую передаем данные полученные из textarea*/
     /*! после current это опциональный оператор */
     let addPost = () => {
-        let text = newPostElement.current!.value;
-        props.addPost(text);
-        newPostElement.current!.value = ''; /*обнуление textarea*/
+        props.addPost();
     };
+/*функция FLUX круговорота для изменения сетйта при нажатии на какой нибудь символ*/
+    let onPostChange = () => {
+        let text = newPostElement.current!.value;
+        props.updateNewPostText(text);
+
+    }
 
     return (
         <div className={classes.postBlock}>
             <h3>My posts </h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea onChange={onPostChange}
+                              ref={newPostElement}
+                              value={props.newPostText} /> {/*newPostTExt круговорот данных Flux*/}
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>

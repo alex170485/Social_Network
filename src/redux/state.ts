@@ -12,7 +12,8 @@ let state = {
         postData: [
             {id: 1, message: 'How are you?', likeCount: 15},
             {id: 2, message: 'It`s my first post', likeCount: 32}
-        ]
+        ],
+        newPostText: 'IT-Kamasutra'
     },
 
     /*Данные для Dialogs*/
@@ -31,14 +32,21 @@ let state = {
 
 }
 /*Функция добавления поста в state*/
-/*название параметра функции не влияет*/
- export let addPost = (postMessage: string) => {
+/*сообщение берем в стате*/
+ export let addPost = () => {
     let newPost = {
         id:5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likeCount: 0
     }
     state.profilePage.postData.push(newPost);
+     state.profilePage.newPostText = '';
+    rerenderEntireTree(state);
+}
+
+/*функция изменения state при наборе текста*/
+export let updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = (newText);
     rerenderEntireTree(state);
 }
 

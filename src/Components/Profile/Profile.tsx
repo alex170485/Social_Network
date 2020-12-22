@@ -7,11 +7,15 @@ type postDataType = {
     id: number;
     message: string;
     likeCount: number;
+
 }
 
 type postDataProps = {
     postDataType: Array<postDataType>;
     addPost:() => void;
+    updateNewPostText:() => void;
+    newPostText: string;
+
 }
 
 function Profile(props: postDataProps) {
@@ -21,6 +25,8 @@ function Profile(props: postDataProps) {
             <ProfileInfo />
             <MyPosts postDataType =  {props.postDataType}
                      addPost = {props.addPost}
+                     newPostText={props.newPostText}
+                     updateNewPostText = {props.updateNewPostText}
 
             />
         </div>

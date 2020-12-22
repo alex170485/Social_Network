@@ -19,6 +19,8 @@ function App(props:any) {
                     {/*изменил метод отрисовки с component на render*/}
                     <Route render={() => <Profile postDataType={props.state.profilePage.postData}
                                                   addPost = {props.addPost}
+                                                  newPostText={props.state.profilePage.newPostText}
+                                                  updateNewPostText = {props.updateNewPostText}
                     />} path={'/profile'}/>
                     <Route render={() => <Dialogs dialogDataType={props.state.dialogsPage.dialogData}
                                                   messagesDataType={props.state.dialogsPage.messagesData}/>}

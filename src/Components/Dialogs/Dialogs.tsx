@@ -54,7 +54,7 @@ const Dialogs = (props: allDialogPropsType) => {
                 {messagesDataMap}
             </div>
             <div>
-                <textarea ref={newPost}></textarea>
+                <textarea ref={newPost} />
                 <button onClick={addNewPost}>Push</button>
             </div>
         </div>
