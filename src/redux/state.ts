@@ -1,9 +1,10 @@
-import {rerenderEntireTree} from "../render";
 
 export type StateType = {
 
 }
-
+export let rerenderEntireTree = (arg0: any) => {
+    console.log('state is changed')
+};
 
 let state = {
     /*Данные для Profile*/
@@ -48,6 +49,10 @@ let state = {
 export let updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = (newText);
     rerenderEntireTree(state);
+}
+/* новая функция перересовки через callback*/
+export const subscribe = (observer: any) => {
+    rerenderEntireTree = observer; /*Паттерн наблюдатель */
 }
 
 
