@@ -12,21 +12,21 @@ type postDataType = {
 
 type postDataProps = {
     postDataType: Array<postDataType>;
-    addPost:() => void;
-    updateNewPostText:() => void;
     newPostText: string;
+    dispatch: any;
 
 }
 
 function Profile(props: postDataProps) {
+    debugger
 
     return (
         <div className={classes.content}>
             <ProfileInfo />
             <MyPosts postDataType =  {props.postDataType}
-                     addPost = {props.addPost}
+                     dispatch = {props.dispatch}
                      newPostText={props.newPostText}
-                     updateNewPostText = {props.updateNewPostText}
+
 
             />
         </div>

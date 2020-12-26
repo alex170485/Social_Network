@@ -13,9 +13,8 @@ type postDataType = {
 
 type postDataTypeProps = {
     postDataType: Array<postDataType>;
-    addPost:() => void;
-    updateNewPostText:(arg0:string)=> void;
     newPostText: string;
+    dispatch: any;
 
 }
 
@@ -31,12 +30,12 @@ function MyPosts(props: postDataTypeProps) {
     /*Создаем функцию колбэк в которую передаем данные полученные из textarea*/
     /*! после current это опциональный оператор */
     let addPost = () => {
-        props.addPost();
+        props.dispatch({type: 'ADD-POST'});
     };
 /*функция FLUX круговорота для изменения сетйта при нажатии на какой нибудь символ*/
     let onPostChange = () => {
         let text = newPostElement.current!.value;
-        props.updateNewPostText(text);
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text});
 
     }
 

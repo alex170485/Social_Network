@@ -11,6 +11,7 @@ import Settings from "./Components/Settings/Settings";
 
 
 function App(props:any) {
+    debugger;
     return (
             <div className="App-wrapper">
                 <Header/>
@@ -18,9 +19,8 @@ function App(props:any) {
                 <div className='App-wrapper-content'>
                     {/*изменил метод отрисовки с component на render*/}
                     <Route render={() => <Profile postDataType={props.state.profilePage.postData}
-                                                  addPost = {props.addPost}
+                                                  dispatch = {props.dispatch}
                                                   newPostText={props.state.profilePage.newPostText}
-                                                  updateNewPostText = {props.updateNewPostText}
                     />} path={'/profile'}/>
                     <Route render={() => <Dialogs dialogDataType={props.state.dialogsPage.dialogData}
                                                   messagesDataType={props.state.dialogsPage.messagesData}/>}
