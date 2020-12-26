@@ -37,7 +37,7 @@ let store = {
     subscribe (observer: any){
         this._callSubscriber = observer; /*Паттерн наблюдатель */
     },  /* новая функция перересовки через callback*/
-
+/* Метод dispatch заменяет не приватные методы и передается в props только он. Главное правильно описать type экшена (действия)*/
     dispatch(action: any) {
         if(action.type === 'ADD-POST') { /*'экшен добавления поста в state*//*сообщение берем в стате*/
             let newPost = {
