@@ -1,6 +1,7 @@
 import React from "react";
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/state";
 
 
 type postDataType = {
@@ -18,6 +19,7 @@ type postDataTypeProps = {
 
 }
 
+
 function MyPosts(props: postDataTypeProps) {
     /*функция МАР для отрисовка компонетны Post*/
     let postDataMap = props.postDataType.map(postDataProps => {
@@ -30,12 +32,13 @@ function MyPosts(props: postDataTypeProps) {
     /*Создаем функцию колбэк в которую передаем данные полученные из textarea*/
     /*! после current это опциональный оператор */
     let addPost = () => {
-        props.dispatch({type: 'ADD-POST'});
+        props.dispatch(addPostActionCreator());
     };
 /*функция FLUX круговорота для изменения сетйта при нажатии на какой нибудь символ*/
     let onPostChange = () => {
         let text = newPostElement.current!.value;
-        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text});
+       /* props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text}); так было <--*/
+        props.dispatch(updateNewPostTextActionCreator(text));
 
     }
 

@@ -1,7 +1,10 @@
+/*Выносим Action Type кнопки для быстрого создания  ctrl*alt*v */
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
-export type StateType = {
 
-}
+
+export type StateType = {}
 let store = {
     _state: {
         /*Данные для Profile*/
@@ -31,28 +34,43 @@ let store = {
     getState() {
         return this._state;
     },
-    _callSubscriber (arg0: any) {
+    _callSubscriber(arg0: any) {
         console.log('state is changed')
     },
-    subscribe (observer: any){
+    subscribe(observer: any) {
         this._callSubscriber = observer; /*Паттерн наблюдатель */
     },  /* новая функция перересовки через callback*/
-/* Метод dispatch заменяет не приватные методы и передается в props только он. Главное правильно описать type экшена (действия)*/
+    /* Метод dispatch заменяет не приватные методы и передается в props только он. Главное правильно описать type экшена (действия)*/
     dispatch(action: any) {
-        if(action.type === 'ADD-POST') { /*'экшен добавления поста в state*//*сообщение берем в стате*/
+        debugger;
+        if (action.type === ADD_POST) { /*'экшен добавления поста в state*//*сообщение берем в стате*/
             let newPost = {
-                id:5,
+                id: 5,
                 message: this._state.profilePage.newPostText,
                 likeCount: 0
             }
             this._state.profilePage.postData.push(newPost);
             this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
-        } else if ( action.type === 'UPDATE-NEW-POST-TEXT') { /*экшн изменения state при наборе текста*/
+        } else if (action.type === UPDATE_NEW_POST_TEXT) { /*экшн изменения state при наборе текста*/
             this._state.profilePage.newPostText = (action.newText);
             this._callSubscriber(this._state);
         }
     }
+}
+/*Функции для создания action типа*/
+export const addPostActionCreator = () => {
+    return {
+        type: ADD_POST
+    }
+}
+export const updateNewPostTextActionCreator = (text: string) => {
+    return {
+        UPDATE_NEW_POST_TEXT,
+        newText: text
+
+    }
+
 }
 
 export default store;

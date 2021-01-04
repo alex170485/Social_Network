@@ -11,7 +11,6 @@ import Settings from "./Components/Settings/Settings";
 
 
 function App(props:any) {
-    debugger;
     return (
             <div className="App-wrapper">
                 <Header/>
