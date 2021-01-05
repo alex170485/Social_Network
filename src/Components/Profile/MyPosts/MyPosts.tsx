@@ -37,11 +37,10 @@ function MyPosts(props: postDataTypeProps) {
 /*функция FLUX круговорота для изменения сетйта при нажатии на какой нибудь символ*/
     let onPostChange = () => {
         let text = newPostElement.current!.value;
-       /* props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text}); так было <--*/
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text});
         props.dispatch(updateNewPostTextActionCreator(text));
 
     }
-
     return (
         <div className={classes.postBlock}>
             <h3>My posts </h3>

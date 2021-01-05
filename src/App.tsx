@@ -22,7 +22,9 @@ function App(props:any) {
                                                   newPostText={props.state.profilePage.newPostText}
                     />} path={'/profile'}/>
                     <Route render={() => <Dialogs dialogDataType={props.state.dialogsPage.dialogData}
-                                                  messagesDataType={props.state.dialogsPage.messagesData}/>}
+                                                  messagesDataType={props.state.dialogsPage.messagesData}
+                                                  store = {props.store}
+                    />}
                            path={'/dialogs'}/>
                     <Route render={() => <Music/>} path={'/music'}/>
                     <Route render={() => <News/>} path={'/news'}/>

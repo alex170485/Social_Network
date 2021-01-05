@@ -2,6 +2,7 @@ import React from "react";
 import style from '../Dialogs/Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/state";
 
 type dialogDataType = {
     id: number;
@@ -17,6 +18,7 @@ type messagesDataType = {
 type allDialogPropsType = {
     dialogDataType: Array<dialogDataType>;
     messagesDataType: Array<messagesDataType>;
+    store: any
 }
 
 
@@ -38,11 +40,20 @@ const Dialogs = (props: allDialogPropsType) => {
             <Message message={messagesData.message} id={messagesData.id}/>
         )
     })
-    let newPost = React.createRef<HTMLTextAreaElement>();
-    let addNewPost = () => {
-        let newTextPost = newPost.current!.value;
-        alert(newTextPost);
-    };
+
+    /*Функция добавления сообщения*/
+    let onSendMessageClick = () => {
+        props.store.dispatch(sendMessageCreator())
+
+    }
+    let onNewMessageChange = (e:any) => {
+        let body = e.target.value
+        props.store.dispatch(updateNewMessageBodyCreator(body))
+    }
+
+    /*изменение textarea*/
+    let newMessageBody = props.store.newMessageBody;
+
 
 
     return (
@@ -51,11 +62,13 @@ const Dialogs = (props: allDialogPropsType) => {
                 {dialogDataMap}
             </div>
             <div className={style.messages}>
-                {messagesDataMap}
+                <div>{messagesDataMap}</div>
             </div>
             <div>
-                <textarea ref={newPost} />
-                <button onClick={addNewPost}>Push</button>
+                <div><textarea value={newMessageBody}
+                               onChange={onNewMessageChange}
+                               placeholder={'Enter your message '}/></div>
+                <div><button onClick={onSendMessageClick}>Push</button></div>
             </div>
         </div>
     )

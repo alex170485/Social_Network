@@ -12,7 +12,9 @@ let rerenderEntireTree = (state: any) => {
         <React.StrictMode>
             <BrowserRouter>
                 <App state={state}
-                     dispatch={store.dispatch.bind(store)} /* bind связывает метод с владельцем этого метода*/
+                     dispatch={store.dispatch.bind(store)}
+                     store = {store}
+                    /* bind связывает метод с владельцем этого метода*/
                 />
             </BrowserRouter>
         </React.StrictMode>,
