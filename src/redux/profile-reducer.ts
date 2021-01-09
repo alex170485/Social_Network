@@ -24,7 +24,7 @@ const profileReducer = (state: any,action: any) => {
         state.newPostText = '';
     }
     else if (action.type === UPDATE_NEW_POST_TEXT) { /*экшн изменения state при наборе текста*/
-        state.newPostText = (action.newText);
+        state.newPostText = (action.newText); /*'riy */
     }
 
     return state
