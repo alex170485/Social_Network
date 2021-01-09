@@ -13,6 +13,7 @@ export const updateNewPostTextActionCreator = (text: string) => {
 }
 
 
+
 const profileReducer = (state: any,action: any) => {
     if (action.type === ADD_POST) { /*'экшен добавления поста в state*//*сообщение берем в стате*/
         let newPost = {
