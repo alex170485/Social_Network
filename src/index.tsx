@@ -4,16 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
-import store from "./redux/state";
+import store, { RootStateReduxType } from "./redux/redux-store";
 
 
-let rerenderEntireTree = (state: any) => {
+let rerenderEntireTree = (state: RootStateReduxType) => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={state}
-                     dispatch={store.dispatch.bind(store)}
-                     store = {store}
+                <App
+                    dispatch={store.dispatch.bind(store)}
+                    store={store}
                     /* bind связывает метод с владельцем этого метода*/
                 />
             </BrowserRouter>
@@ -28,4 +28,7 @@ let rerenderEntireTree = (state: any) => {
 reportWebVitals();
 
 rerenderEntireTree(store.getState());
-store.subscribe(rerenderEntireTree);
+store.subscribe(() => {
+    let state = store.getState()
+    rerenderEntireTree(state)
+});

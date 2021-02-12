@@ -1,13 +1,11 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import style from '../Dialogs/Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reduser";
 
 type dialogDataType = {
     id: number;
     name: string
-
 }
 
 type messagesDataType = {
@@ -16,26 +14,28 @@ type messagesDataType = {
 }
 
 type allDialogPropsType = {
-    dialogDataType: Array<dialogDataType>;
-    messagesDataType: Array<messagesDataType>;
-    store: any
+    dialogData: Array<dialogDataType>;
+    messagesData: Array<messagesDataType>;
+    updateNewMessageBody:(body: string) => void;
+    sendMessage:() => void
+    newMessageBody:string
+
+
 }
 
 
 const Dialogs = (props: allDialogPropsType) => {
-    /*Массив данных для компоненты Диалог*/
+
 
     /* функиця МАР для отресовки компонетны Диалог*/
-    let dialogDataMap = props.dialogDataType.map(dialogsData => {
+    let dialogDataMap = props.dialogData.map((dialogsData) => {
         return (
             <DialogItem name={dialogsData.name} id={dialogsData.id}/>
         );
     });
 
-    /* Массив данных для Message*/
-
     /*функция МАР для отрисовки компонетны Message*/
-    let messagesDataMap = props.messagesDataType.map(messagesData => {
+    let messagesDataMap = props.messagesData.map(messagesData => {
         return (
             <Message message={messagesData.message} id={messagesData.id}/>
         )
@@ -43,19 +43,14 @@ const Dialogs = (props: allDialogPropsType) => {
 
     /*Функция добавления сообщения*/
     let onSendMessageClick = () => {
-        props.store.dispatch(sendMessageCreator())
+        props.sendMessage();
 
     }
-    let onNewMessageChange = (e:any) => {
+    let onNewMessageChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.target.value
-        props.store.dispatch(updateNewMessageBodyCreator(body))
+        props.updateNewMessageBody(body)
     }
-
-    /*изменение textarea*/
-    let newMessageBody = props.store.newMessageBody;
-
-
-
+    console.log(onNewMessageChange)
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsItem}>
@@ -65,7 +60,7 @@ const Dialogs = (props: allDialogPropsType) => {
                 <div>{messagesDataMap}</div>
             </div>
             <div>
-                <div><textarea value={newMessageBody}
+                <div><textarea value={props.newMessageBody}
                                onChange={onNewMessageChange}
                                placeholder={'Enter your message '}/></div>
                 <div><button onClick={onSendMessageClick}>Push</button></div>

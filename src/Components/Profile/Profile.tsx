@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./Profile.module.css"
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./MyPosts/ProfileInfo/ProfileInfo";
+import MyPostsContainer from "./MyPosts/ProfileInfo/MyPostsContainer";
 
 type postDataType = {
     id: number;
@@ -10,18 +11,18 @@ type postDataType = {
 }
 
 type postDataProps = {
-    postDataType: Array<postDataType>;
+    postData: Array<postDataType>;
     newPostText: string;
     dispatch: any;
 }
 
-function Profile(props: postDataProps) {
+const Profile: React.FC<postDataProps> = (props) => {
     return (
         <div className={classes.content}>
-            <ProfileInfo />
-            <MyPosts postDataType =  {props.postDataType}
-                     dispatch = {props.dispatch}
-                     newPostText={props.newPostText}
+            <ProfileInfo/>
+            <MyPostsContainer postDataType={props.postData}
+                              dispatch={props.dispatch}
+                              newPostText={props.newPostText}
             />
         </div>
     );
