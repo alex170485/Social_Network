@@ -1,6 +1,5 @@
 import React from "react";
 import classes from "./Profile.module.css"
-import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./MyPosts/ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/ProfileInfo/MyPostsContainer";
 
@@ -16,14 +15,11 @@ type postDataProps = {
     dispatch: any;
 }
 
-const Profile: React.FC<postDataProps> = (props) => {
+const Profile = () => {
     return (
         <div className={classes.content}>
             <ProfileInfo/>
-            <MyPostsContainer postDataType={props.postData}
-                              dispatch={props.dispatch}
-                              newPostText={props.newPostText}
-            />
+            <MyPostsContainer/>
         </div>
     );
 }

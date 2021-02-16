@@ -16,10 +16,9 @@ type messagesDataType = {
 type allDialogPropsType = {
     dialogData: Array<dialogDataType>;
     messagesData: Array<messagesDataType>;
+    newMessageBody:string;
     updateNewMessageBody:(body: string) => void;
     sendMessage:() => void
-    newMessageBody:string
-
 
 }
 
@@ -50,7 +49,6 @@ const Dialogs = (props: allDialogPropsType) => {
         let body = e.target.value
         props.updateNewMessageBody(body)
     }
-    console.log(onNewMessageChange)
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsItem}>

@@ -5,17 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import store, { RootStateReduxType } from "./redux/redux-store";
+import {Provider} from "react-redux";
 
 
 let rerenderEntireTree = (state: RootStateReduxType) => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App
-                    dispatch={store.dispatch.bind(store)}
-                    store={store}
-                    /* bind связывает метод с владельцем этого метода*/
-                />
+                <Provider store={store}>
+                <App/>
+                </Provider>
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')

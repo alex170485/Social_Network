@@ -12,7 +12,7 @@ type postDataType = {
 }
 
 type postDataTypeProps = {
-    postDataType: Array<postDataType>;
+    postData: Array<postDataType>;
     newPostText: string;
     addPost:() => void
     updateNewPostText:(text:string) => void
@@ -22,7 +22,7 @@ type postDataTypeProps = {
 
 function MyPosts(props: postDataTypeProps) {
     /*функция МАР для отрисовка компонетны Post*/
-    let postDataMap = props.postDataType.map(postDataProps => {
+    let postDataMap = props.postData.map(postDataProps => {
         return (
             <Post message={postDataProps.message} likeCount={postDataProps.likeCount} id={postDataProps.id}/>
         )

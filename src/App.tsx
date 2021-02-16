@@ -16,7 +16,7 @@ type PropsType = {
     store: StoreReduxType
 }
 
-function App(props: PropsType) {
+function App() {
 
     return (
 
@@ -25,11 +25,8 @@ function App(props: PropsType) {
             <NavBar/>
             <div className='App-wrapper-content'>
                 {/*изменил метод отрисовки с component на render*/}
-                <Route render={() => <Profile postData={props.store.getState().profilePage.postData}
-                                              dispatch={props.dispatch}
-                                              newPostText={props.store.getState().profilePage.newPostText}
-                />} path={'/profile'}/>
-                <Route render={() => <DialogsContainer store={props.store}/>} path={'/dialogs'}/>
+                <Route render={() => <Profile/>} path={'/profile'}/>
+                <Route render={() => <DialogsContainer/>} path={'/dialogs'}/>
                 <Route render={() => <Music/>} path={'/music'}/>
                 <Route render={() => <News/>} path={'/news'}/>
                 <Route render={() => <Settings/>} path={'/settings'}/>
