@@ -25,11 +25,30 @@ type ProfilePageType = {
     postData: Array<PostDataType>
     newPostText:string
 }
+type locationUsers = {
+    city: string,
+    country: string
+}
+export type UserType = {
+    id: number,
+    photoUrl: string
+    followed: boolean
+    fullName: string
+    status: string
+    location: locationUsers
+}
+
+export type UsersType = {
+    users: Array<UserType>
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
+}
 
 
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
+    usersPage: UsersType
 
 }
 

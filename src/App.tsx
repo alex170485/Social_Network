@@ -9,6 +9,7 @@ import News from "./Components/News/News";
 import Settings from "./Components/Settings/Settings";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import {StoreReduxType} from "./redux/redux-store";
+import UsersContainer from "./Components/Users/UsersContainer";
 
 
 type PropsType = {
@@ -27,6 +28,7 @@ function App() {
                 {/*изменил метод отрисовки с component на render*/}
                 <Route render={() => <Profile/>} path={'/profile'}/>
                 <Route render={() => <DialogsContainer/>} path={'/dialogs'}/>
+                <Route render={() => <UsersContainer/>} path={'/users'}/>
                 <Route render={() => <Music/>} path={'/music'}/>
                 <Route render={() => <News/>} path={'/news'}/>
                 <Route render={() => <Settings/>} path={'/settings'}/>
