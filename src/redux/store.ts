@@ -1,6 +1,4 @@
-/*Выносим Action Type кнопки для быстрого создания  ctrl*alt*v */
-import profileReducer from "./profile-reducer";
-import dialogsReducer from "./dialogs-reduser";
+
 
 type MessagesDataType = {
     id: number
@@ -25,23 +23,25 @@ type ProfilePageType = {
     postData: Array<PostDataType>
     newPostText:string
 }
-type locationUsers = {
+type locationUser = {
     city: string,
     country: string
 }
 export type UserType = {
     id: number,
-    photoUrl: string
+    photos: string
     followed: boolean
-    fullName: string
+    name: string
     status: string
-    location: locationUsers
+    location: locationUser
 }
 
 export type UsersType = {
     users: Array<UserType>
     follow: (userId: number) => void
     unFollow: (userId: number) => void
+    setUsers: (users:Array<UserType>) => void
+
 }
 
 
