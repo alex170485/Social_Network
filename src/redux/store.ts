@@ -29,7 +29,10 @@ type locationUser = {
 }
 export type UserType = {
     id: number,
-    photos: string
+    photos: {
+        small: string,
+        large: string
+    }
     followed: boolean
     name: string
     status: string
@@ -41,6 +44,11 @@ export type UsersType = {
     follow: (userId: number) => void
     unFollow: (userId: number) => void
     setUsers: (users:Array<UserType>) => void
+    setCurrentPage: (pageNumber: number) => void
+    pageSize: number
+    totalUserCount: number
+    currentPage: number
+    setTotalUsersCount:(totalCount: number)=> void
 
 }
 

@@ -3,10 +3,16 @@ import {UserType} from "./store";
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
+const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
+const SET_USERS_TOTAL_COUNT = 'SET-USERS-TOTAL-COUNT'
 
 
 let initialState = {
-    users: [] as Array<UserType>
+    users: [] as Array<UserType>,
+    pageSize: 5,
+    totalUserCount: 0,
+    currentPage: 1
+
 }
 
 type InitialStateType = typeof initialState
@@ -34,7 +40,12 @@ const userReducer = (state: InitialStateType = initialState, action: any): Initi
                 })
             }
         case SET_USERS :
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users:action.users}
+        case SET_CURRENT_PAGE : {
+            return {...state, currentPage: action.currentPage}
+        }
+        case SET_USERS_TOTAL_COUNT :
+            return {...state, totalUserCount: action.totalUserCount}
 
         default :
             return state
@@ -44,5 +55,7 @@ const userReducer = (state: InitialStateType = initialState, action: any): Initi
 export const followAC = (userId: number) => ({type: FOLLOW, userId});
 export const unFollowAC = (userId: number) => ({type: UNFOLLOW, userId});
 export const setUsersAC = (users: Array<UserType>) => ({type: SET_USERS, users})
+export const SetCurrentPageAC = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage})
+export const SetUsersTotalCountAC = (totalUserCount: number) => ({type: SET_USERS_TOTAL_COUNT, totalUserCount})
 
 export default userReducer
