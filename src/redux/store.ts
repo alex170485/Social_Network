@@ -49,6 +49,8 @@ export type UsersType = {
     totalUserCount: number
     currentPage: number
     setTotalUsersCount:(totalCount: number)=> void
+    ToggleIsFetching: (isFetching: boolean)=> void
+    isFetching: boolean
 
 }
 
