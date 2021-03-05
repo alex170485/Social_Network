@@ -2,6 +2,7 @@ import React from "react";
 import style from "./Users.module.css";
 import userPhoto from "../../img/3426.jpg"
 import {UserType} from "../../redux/store";
+import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
     totalUserCount: number,
@@ -35,8 +36,10 @@ const Users: React.FC<UsersPropsType> = (props) => {
                     props.users.map(user => <div key={user.id}>
                 <span>
                     <div>
+                        <NavLink to = {'/profile/' + user.id}>
                         <img src={user.photos.small !=null ? user.photos.small : userPhoto}
                              className={style.userPhoto}/>
+                             </NavLink>
                         //{/*.small != null ? user.photoUrl.small : userPhoto}*/}
                     </div>
                     <div>

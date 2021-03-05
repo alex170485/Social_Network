@@ -59,28 +59,28 @@ let mapStateToProps = (state: RootStateReduxType) => {
         isFetching: state.usersPage.isFetching
     }
 }
-let mapDispatchToProps = (dispatch: any) => {
-    return {
-        follow: (userId: number) => {
-            dispatch(followAC(userId))
-        },
-        unFollow: (userId: number) => {
-            dispatch(unFollowAC(userId))
-        },
-        setUsers: (users:Array<UserType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage:(pageNumber: number)=>{
-            dispatch(SetCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount:(totalCount: number)=>{
-            dispatch(SetUsersTotalCountAC(totalCount))
-        },
-        ToggleIsFetching:(isFetching: boolean) => {
-            dispatch(ToggleIsFetchingAC(isFetching))
-        }
-    }
-}
+// let mapDispatchToProps = (dispatch: any) => {
+//     return {
+//         follow: (userId: number) => {
+//             dispatch(followAC(userId))
+//         },
+//         unFollow: (userId: number) => {
+//             dispatch(unFollowAC(userId))
+//         },
+//         setUsers: (users:Array<UserType>) => {
+//             dispatch(setUsersAC(users))
+//         },
+//         setCurrentPage:(pageNumber: number)=>{
+//             dispatch(SetCurrentPageAC(pageNumber))
+//         },
+//         setTotalUsersCount:(totalCount: number)=>{
+//             dispatch(SetUsersTotalCountAC(totalCount))
+//         },
+//         ToggleIsFetching:(isFetching: boolean) => {
+//             dispatch(ToggleIsFetchingAC(isFetching))
+//         }
+//     }
+// }
 
 
 export default connect(mapStateToProps,

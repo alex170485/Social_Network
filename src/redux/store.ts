@@ -13,15 +13,43 @@ export type DialogsPageType = {
     messagesData: Array<MessagesDataType>
     newMessageBody: string
 }
-
 type PostDataType = {
     id: number
     message: string
     likeCount: number
 }
-type ProfilePageType = {
+
+
+type ContactUserProfileType = {
+    facebook: string,
+    github: string,
+    instagram: string,
+    mainLink: null
+    twitter: string,
+    vk: string,
+    website: null
+    youtube: null
+}
+type PhotoUserProfileType = {
+    large: string,
+    small: string
+}
+type UserProfileType = {
+    aboutMe: string,
+    contacts: ContactUserProfileType,
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    photos: PhotoUserProfileType
+    userId: number
+
+}
+
+export type ProfilePageType = {
     postData: Array<PostDataType>
     newPostText:string
+    profile: UserProfileType
+
 }
 type locationUser = {
     city: string,
@@ -38,7 +66,6 @@ export type UserType = {
     status: string
     location: locationUser
 }
-
 export type UsersType = {
     users: Array<UserType>
     follow: (userId: number) => void
@@ -59,7 +86,6 @@ export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     usersPage: UsersType
-
 }
 
 export type storeType = {
