@@ -1,9 +1,8 @@
 import React from "react";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reduser";
 import Dialogs from "./Dialogs";
-import {StoreReduxType} from "../../redux/redux-store";
+import {RootStateReduxType, StoreReduxType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {StateType} from "../../redux/store";
 
 
 type dialogDataType = {
@@ -50,7 +49,7 @@ type allDialogPropsType = {
 //     </StoreContext.Consumer>
 //
 // }
-let mapStateToProps = (state: StateType) => {
+let mapStateToProps = (state: RootStateReduxType) => {
     return {
         dialogData: state.dialogsPage.dialogData,
         messagesData: state.dialogsPage.messagesData,
