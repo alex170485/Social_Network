@@ -3,6 +3,8 @@ import style from "./Users.module.css";
 import userPhoto from "../../img/3426.jpg"
 import {UserType} from "../../redux/store";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
+import {getFollowedUser, getUnFollowedUser} from "../api/api";
 
 type UsersPropsType = {
     totalUserCount: number,
@@ -21,23 +23,23 @@ const Users: React.FC<UsersPropsType> = (props) => {
         pages.push(i)
     }
 
-        return (
+    return (
+        <div>
             <div>
-                <div>
-                    {pages.map(el => {
-                        //@ts-ignore
-                        return <span className={props.currentPage === el && style.selected}
-                                     onClick={(e) => {
-                                         props.onPageChange(el)
-                                     }}>{el}</span>
-                    })}
-                </div>
-                {
-                    props.users.map(user => <div key={user.id}>
+                {pages.map(el => {
+                    //@ts-ignore
+                    return <span className={props.currentPage === el && style.selected}
+                                 onClick={(e) => {
+                                     props.onPageChange(el)
+                                 }}>{el}</span>
+                })}
+            </div>
+            {
+                props.users.map(user => <div key={user.id}>
                 <span>
                     <div>
-                        <NavLink to = {'/profile/' + user.id}>
-                        <img src={user.photos.small !=null ? user.photos.small : userPhoto}
+                        <NavLink to={'/profile/' + user.id}>
+                        <img src={user.photos.small != null ? user.photos.small : userPhoto}
                              className={style.userPhoto}/>
                              </NavLink>
                         //{/*.small != null ? user.photoUrl.small : userPhoto}*/}
@@ -45,30 +47,41 @@ const Users: React.FC<UsersPropsType> = (props) => {
                     <div>
                         {user.followed ?
                             <button onClick={() => {
-                                props.unFollow(user.id)
+                                getUnFollowedUser(user.id)
+                                    .then(response => {
+                                        if (response.data.resultCode === 0) {
+                                            props.unFollow(user.id)
+                                        }
+                                    })
+
                             }}>UnFollow</button> :
                             <button onClick={() => {
-                                props.follow(user.id)
+                                getFollowedUser(user.id)
+                                    .then(response => {
+                                        if (response.data.resultCode === 0) {
+                                            props.follow(user.id)
+                                        }
+                                    })
                             }}>Follow</button>}
-                    </div>
-                </span>
-                        <span>
+                            </div>
+                            </span>
                     <span>
-                        <div>{user.name}</div><div>{user.status}</div>
-                    </span>
-                    <span>
-                        <div>{"user.location.country"}</div>
-                        <div>{"user.location.city"}</div>
-                    </span>
-                </span>
+                            <span>
+                            <div>{user.name}</div><div>{user.status}</div>
+                            </span>
+                            <span>
+                            <div>{"user.location.country"}</div>
+                            <div>{"user.location.city"}</div>
+                            </span>
+                            </span>
 
-                    </div>)
-                }
+                </div>)
+            }
 
 
-            </div>
+        </div>
 
-        )
+    )
 }
 
 
