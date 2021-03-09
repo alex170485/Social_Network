@@ -14,6 +14,8 @@ type UsersPropsType = {
     users: Array<UserType>
     unFollow: (userId: number) => void,
     follow: (userId: number) => void
+    ToggleIsFollow:(isFollow: boolean, id: number)=>void
+    followingInProgress: Array<number>
 }
 
 const Users: React.FC<UsersPropsType> = (props) => {
@@ -46,21 +48,25 @@ const Users: React.FC<UsersPropsType> = (props) => {
                     </div>
                     <div>
                         {user.followed ?
-                            <button onClick={() => {
+                            <button disabled = {props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                                props.ToggleIsFollow(true, user.id)
                                 getUnFollowedUser(user.id)
                                     .then(response => {
                                         if (response.data.resultCode === 0) {
                                             props.unFollow(user.id)
                                         }
+                                        props.ToggleIsFollow(false, user.id)
                                     })
 
                             }}>UnFollow</button> :
-                            <button onClick={() => {
+                            <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                                props.ToggleIsFollow(true, user.id)
                                 getFollowedUser(user.id)
                                     .then(response => {
                                         if (response.data.resultCode === 0) {
                                             props.follow(user.id)
                                         }
+                                        props.ToggleIsFollow(false, user.id)
                                     })
                             }}>Follow</button>}
                             </div>

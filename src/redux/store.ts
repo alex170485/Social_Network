@@ -78,6 +78,8 @@ export type UsersType = {
     setTotalUsersCount:(totalCount: number)=> void
     ToggleIsFetching: (isFetching: boolean)=> void
     isFetching: boolean
+    ToggleIsFollow: (isFollowing: boolean, userId: number) => void
+    followingInProgress: Array<number>
 
 }
 
