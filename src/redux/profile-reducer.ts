@@ -27,6 +27,7 @@ export type UserProfileType = {
     photos: PhotoUserProfileType
     userId: number
 
+
 }
 
 type PostType = {
