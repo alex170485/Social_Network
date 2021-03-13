@@ -5,6 +5,7 @@ export const getUser = (pageNumber: number, pageSize: number) => {
     return  axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${pageSize}`, {
         withCredentials: true
     }).then(response => response.data)}
+
 export const getFollowedUser = (id: number) => {
    return axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
             withCredentials: true,

@@ -80,6 +80,9 @@ export type UsersType = {
     isFetching: boolean
     ToggleIsFollow: (isFollowing: boolean, userId: number) => void
     followingInProgress: Array<number>
+    getUserThunkCreator: (currentPage: number, pageSize: number,  )=> void
+    followThunk:(userId:number) => void
+    unfollowThunk:(userId: number) => void
 
 }
 
