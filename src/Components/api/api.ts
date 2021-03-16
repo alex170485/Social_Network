@@ -27,4 +27,7 @@ export const getUnFollowedUser = (id: number) => {
 export const getUserProfile = (userId: string) => {
    return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
 }
-
+export const getAuthMy = () => {
+    return  axios.get('https://social-network.samuraijs.com/api/1.0/auth/me',{
+        withCredentials: true})
+}

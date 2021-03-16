@@ -107,4 +107,5 @@ export const unfollowThunk = (userId: number) => {
             })
     }
 }
+
 export default userReducer

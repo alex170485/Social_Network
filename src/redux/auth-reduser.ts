@@ -1,3 +1,5 @@
+import {getAuthMy} from "../Components/api/api";
+
 const SET_USER_DATA = 'SET-USER-DATA'
 
 
@@ -29,5 +31,17 @@ const authReducer = (state: authStateType = initialState, action: any) => {
 
     }
 }
+export const authMyThunk = () => {
+    return (dispatch: any) => {
+        getAuthMy()
+            .then(response => {
+                if(response.data.resultCode === 0) {
+                    let {id, email, login} = response.data.data;
+                    dispatch(setAuthUserData(id, email, login))
+                }
+            })
+    }
+}
 export const setAuthUserData = (userId: number, email: string, login: string) => ({type:SET_USER_DATA, data: {userId,email,login} })
+
 export default authReducer
