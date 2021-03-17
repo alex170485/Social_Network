@@ -26,7 +26,8 @@ export type UserProfileType = {
     lookingForAJob: boolean
     lookingForAJobDescription: string
     photos: PhotoUserProfileType
-    userId: number
+    userId: number,
+    isAuth: boolean
 
 
 }

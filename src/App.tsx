@@ -10,6 +10,7 @@ import {StoreReduxType} from "./redux/redux-store";
 import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContainer from './Components/Profile/ProfileContainer';
 import HeaderContainer from "./Components/Header/HeaderContainer";
+import Login from "./Components/Login/Login";
 
 
 type PropsType = {
@@ -30,6 +31,7 @@ function App() {
                 <Route render={() => <DialogsContainer/>} path={'/dialogs'}/>
                 <Route render={() => <UsersContainer/>} path={'/users'}/>
                 <Route render={() => <Music/>} path={'/music'}/>
+                <Route render={() => <Login/>} path={'/login'}/>
                 <Route render={() => <News/>} path={'/news'}/>
                 <Route render={() => <Settings/>} path={'/settings'}/>
             </div>

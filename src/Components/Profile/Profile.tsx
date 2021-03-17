@@ -3,12 +3,13 @@ import classes from "./Profile.module.css"
 import ProfileInfo from "./MyPosts/ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/ProfileInfo/MyPostsContainer";
 import { UserProfileType} from "../../redux/profile-reducer";
+import {Redirect} from "react-router-dom";
 
 
 
 
 type PropsType = {
-    profile: UserProfileType | null
+    profile: UserProfileType | null,
 }
 
 

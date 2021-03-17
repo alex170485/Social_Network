@@ -1,4 +1,5 @@
 import React, {ChangeEvent} from "react";
+import { Redirect } from "react-router-dom";
 import style from '../Dialogs/Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
@@ -20,6 +21,7 @@ type allDialogPropsType = {
     updateNewMessageBody:(body: string) => void;
     sendMessage:() => void
 
+
 }
 
 
@@ -40,6 +42,7 @@ const Dialogs = (props: allDialogPropsType) => {
         )
     })
 
+
     /*Функция добавления сообщения*/
     let onSendMessageClick = () => {
         props.sendMessage();
@@ -49,7 +52,8 @@ const Dialogs = (props: allDialogPropsType) => {
         let body = e.target.value
         props.updateNewMessageBody(body)
     }
-    return (
+
+        return (
         <div className={style.dialogs}>
             <div className={style.dialogsItem}>
                 {dialogDataMap}

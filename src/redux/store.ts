@@ -4,7 +4,7 @@ type MessagesDataType = {
     id: number
     message: string
 }
-type DialogDataType = {
+export type  DialogDataType = {
     id:number
     name: string
 }
