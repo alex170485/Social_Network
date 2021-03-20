@@ -50,6 +50,6 @@ let mapStateToProps = (state: RootStateReduxType): MapStateToPropsType => ({
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {getUserProfileThunk}),
     withRouter,
-    WithAuthRedirect,
+    // WithAuthRedirect,
 )(ProfileContainer)
 
