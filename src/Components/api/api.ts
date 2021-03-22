@@ -31,3 +31,9 @@ export const getAuthMy = () => {
     return  axios.get('https://social-network.samuraijs.com/api/1.0/auth/me',{
         withCredentials: true})
 }
+export const getStatus = (userId: string) => {
+    return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/status/` + userId)
+}
+export const updateStatus = (status: string) => {
+    return axios.put(`https://social-network.samuraijs.com/api/1.0/profile/status`, {status: status})
+}

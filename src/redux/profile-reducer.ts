@@ -1,9 +1,10 @@
-import {getUserProfile} from "../Components/api/api";
+import {getStatus, getUserProfile, updateStatus} from "../Components/api/api";
 
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
+const SET_STATUS = 'SET-STATUS'
 
 type ContactUserProfileType = {
     facebook: string,
@@ -42,7 +43,8 @@ type PostType = {
 export type initialStateType = {
     postData: Array<PostType>,
     newPostText: string,
-    profile:  null
+    profile:  null,
+    status: string
 }
 
 let initialState: initialStateType = {
@@ -51,7 +53,8 @@ let initialState: initialStateType = {
         {id: 2, message: 'It`s my first post', likeCount: 32}
     ],
     newPostText: 'IT-Kamasutra',
-    profile: null
+    profile: null,
+    status: ''
 }
 
 
@@ -75,6 +78,9 @@ const profileReducer = (state = initialState,action: any): initialStateType => {
     if (action.type === SET_USER_PROFILE) {
         return {...state, profile: action.profile}
     }
+    if (action.type === SET_STATUS) {
+        return {...state, status: action.status}
+    }
 
     return state
 }
@@ -87,6 +93,12 @@ export const updateNewPostTextActionCreator = (text: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: text
+    }
+}
+export const setStatus = (status: string) => {
+    return {
+        type: SET_STATUS,
+        status
     }
 }
 
@@ -105,4 +117,19 @@ export const getUserProfileThunk = (userId: string) => {
 
     }
 }
+export const getStatusThunk = (userId: string) =>(dispatch:any) => {
+    getStatus(userId)
+        .then(response => {
+            dispatch(setStatus(response.data))
+        })
+}
+
+export const updateStatusThunk = (status: string) => (dispatch: any) => {
+    updateStatus(status)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+        dispatch(setStatus(response.data)) }
+        })}
+
+
 export default profileReducer;
