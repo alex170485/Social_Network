@@ -19,7 +19,6 @@ type PostDataType = {
     likeCount: number
 }
 
-
 type ContactUserProfileType = {
     facebook: string,
     github: string,
@@ -42,14 +41,11 @@ type UserProfileType = {
     lookingForAJobDescription: string
     photos: PhotoUserProfileType
     userId: number
-
 }
-
 export type ProfilePageType = {
     postData: Array<PostDataType>
     newPostText:string
     profile: UserProfileType
-
 }
 type locationUser = {
     city: string,
@@ -83,23 +79,18 @@ export type UsersType = {
     getUserThunkCreator: (currentPage: number, pageSize: number,  )=> void
     followThunk:(userId:number) => void
     unfollowThunk:(userId: number) => void
-
 }
-
-
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     usersPage: UsersType
 }
-
 export type storeType = {
     _state: StateType
     getState:()=> StateType
     _callSubscriber: any
     subscribe:(observe:()=>void) => void
     dispatch:(action: any) => void
-
 }
 
 /*

@@ -2,7 +2,6 @@ import {getStatus, getUserProfile, updateStatus} from "../Components/api/api";
 
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
 const SET_STATUS = 'SET-STATUS'
 
@@ -28,9 +27,8 @@ export type UserProfileType = {
     lookingForAJobDescription: string
     photos: PhotoUserProfileType
     userId: number,
-    isAuth: boolean
-
-
+    isAuth: boolean,
+    newMyPost: string
 }
 
 type PostType = {
@@ -39,10 +37,8 @@ type PostType = {
     likeCount: number
 }
 
-
 export type initialStateType = {
     postData: Array<PostType>,
-    newPostText: string,
     profile:  null,
     status: string
 }
@@ -52,47 +48,31 @@ let initialState: initialStateType = {
         {id: 1, message: 'How are you?', likeCount: 15},
         {id: 2, message: 'It`s my first post', likeCount: 32}
     ],
-    newPostText: 'IT-Kamasutra',
     profile: null,
     status: ''
 }
-
-
 
 const profileReducer = (state = initialState,action: any): initialStateType => {
     if (action.type === ADD_POST) { /*'экшен добавления поста в state*//*сообщение берем в стате*/
         let newPost = {
             id: 5,
-            message: state.newPostText,
+            message: action.newMyPost,
             likeCount: 0
         }
-        state.postData.push(newPost);
-        state.newPostText = '';
-        return {...state}
+        return {...state, postData: [...state.postData, newPost]}
     }
-    if (action.type === UPDATE_NEW_POST_TEXT) { /*экшн изменения state при наборе текста*/
-        state.newPostText = (action.newText); /*'riy */
-        debugger
-        return {...state, newPostText: action.newText}
-    }
+
     if (action.type === SET_USER_PROFILE) {
         return {...state, profile: action.profile}
     }
     if (action.type === SET_STATUS) {
         return {...state, status: action.status}
     }
-
     return state
 }
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (newMyPost: string) => {
     return {
-        type: ADD_POST
-    }
-}
-export const updateNewPostTextActionCreator = (text: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text
+        type: ADD_POST, newMyPost
     }
 }
 export const setStatus = (status: string) => {

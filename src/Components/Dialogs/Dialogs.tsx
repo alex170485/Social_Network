@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import style from '../Dialogs/Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 type dialogDataType = {
     id: number;
@@ -19,7 +20,7 @@ type allDialogPropsType = {
     messagesData: Array<messagesDataType>;
     newMessageBody:string;
     updateNewMessageBody:(body: string) => void;
-    sendMessage:() => void
+    sendMessage:(newMessageBody:string) => void
 
 
 }
@@ -44,13 +45,12 @@ const Dialogs = (props: allDialogPropsType) => {
 
 
     /*Функция добавления сообщения*/
-    let onSendMessageClick = () => {
-        props.sendMessage();
-
-    }
-    let onNewMessageChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        let body = e.target.value
-        props.updateNewMessageBody(body)
+    // let onSendMessageClick = () => {
+    //     props.sendMessage();
+    //
+    // }
+    const addNewMessage = (values: AddMessageFormType) => {
+        props.sendMessage(values.newMessageBody)
     }
 
         return (
@@ -61,13 +61,28 @@ const Dialogs = (props: allDialogPropsType) => {
             <div className={style.messages}>
                 <div>{messagesDataMap}</div>
             </div>
-            <div>
-                <div><textarea value={props.newMessageBody}
-                               onChange={onNewMessageChange}
-                               placeholder={'Enter your message '}/></div>
-                <div><button onClick={onSendMessageClick}>Push</button></div>
-            </div>
+
+                <AddMessageFormRedux  onSubmit = {addNewMessage}/>
+
         </div>
     )
 }
+type AddMessageFormType = {
+    newMessageBody: string
+    values: string
+    newMessage: string
+
+}
+
+const AddMessageForm =(props: InjectedFormProps<AddMessageFormType>) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div><Field name={'newMessageBody'} component = {'textarea'} placeholder={'Enter your message '}/></div>
+            <div><button>Push</button></div>
+        </form>
+    )
+}
+const AddMessageFormRedux = reduxForm<AddMessageFormType>({
+    form: 'dialogsAddMessageForm'
+})(AddMessageForm)
 export default Dialogs
