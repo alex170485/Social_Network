@@ -30,7 +30,6 @@ function MyPosts(props: postDataTypeProps) {
     const addNewMyPost = (values: postDataTypeProps) => {
         debugger
         props.addPost(values.newMyPost)
-        alert('hi')
     }
 
     return (
