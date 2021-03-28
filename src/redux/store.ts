@@ -46,6 +46,7 @@ export type ProfilePageType = {
     postData: Array<PostDataType>
     newPostText:string
     profile: UserProfileType
+    newMyPost: string
 }
 type locationUser = {
     city: string,

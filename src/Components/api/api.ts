@@ -32,8 +32,12 @@ export const getAuthMy = () => {
         withCredentials: true})
 }
 export const getStatus = (userId: string) => {
-    return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/status/` + userId)
+    return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/status/`+userId)
 }
 export const updateStatus = (status: string) => {
-    return axios.put(`https://social-network.samuraijs.com/api/1.0/profile/status`, {status: status})
+    return axios.put(`https://social-network.samuraijs.com/api/1.0/profile/status`, {status: status},{
+        withCredentials: true,
+        headers: {
+            "API-KEY": "c23443b4-60bf-485c-b390-e5ba1c9043b1"
+        }})
 }

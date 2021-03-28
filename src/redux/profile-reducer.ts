@@ -39,7 +39,7 @@ type PostType = {
 
 export type initialStateType = {
     postData: Array<PostType>,
-    profile:  null,
+    profile: null,
     status: string
 }
 
@@ -52,7 +52,7 @@ let initialState: initialStateType = {
     status: ''
 }
 
-const profileReducer = (state = initialState,action: any): initialStateType => {
+const profileReducer = (state = initialState, action: any): initialStateType => {
     if (action.type === ADD_POST) { /*'экшен добавления поста в state*//*сообщение берем в стате*/
         let newPost = {
             id: 5,
@@ -97,7 +97,7 @@ export const getUserProfileThunk = (userId: string) => {
 
     }
 }
-export const getStatusThunk = (userId: string) =>(dispatch:any) => {
+export const getStatusThunk = (userId: string) => (dispatch: any) => {
     getStatus(userId)
         .then(response => {
             dispatch(setStatus(response.data))
@@ -108,8 +108,10 @@ export const updateStatusThunk = (status: string) => (dispatch: any) => {
     updateStatus(status)
         .then(response => {
             if (response.data.resultCode === 0) {
-        dispatch(setStatus(response.data)) }
-        })}
+                dispatch(setStatus(status))
+            }
+        })
+}
 
 
 export default profileReducer;

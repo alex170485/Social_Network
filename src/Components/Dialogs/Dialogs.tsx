@@ -4,6 +4,7 @@ import style from '../Dialogs/Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Textarea} from "../common/FormsControls/FormsControls";
 
 type dialogDataType = {
     id: number;
@@ -28,27 +29,18 @@ type allDialogPropsType = {
 
 const Dialogs = (props: allDialogPropsType) => {
 
-
-    /* функиця МАР для отресовки компонетны Диалог*/
     let dialogDataMap = props.dialogData.map((dialogsData) => {
         return (
             <DialogItem name={dialogsData.name} id={dialogsData.id}/>
         );
     });
 
-    /*функция МАР для отрисовки компонетны Message*/
     let messagesDataMap = props.messagesData.map(messagesData => {
         return (
             <Message message={messagesData.message} id={messagesData.id}/>
         )
     })
 
-
-    /*Функция добавления сообщения*/
-    // let onSendMessageClick = () => {
-    //     props.sendMessage();
-    //
-    // }
     const addNewMessage = (values: AddMessageFormType) => {
         props.sendMessage(values.newMessageBody)
     }
@@ -77,7 +69,7 @@ type AddMessageFormType = {
 const AddMessageForm =(props: InjectedFormProps<AddMessageFormType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div><Field name={'newMessageBody'} component = {'textarea'} placeholder={'Enter your message '}/></div>
+            <div><Field name={'newMessageBody'} component = {Textarea} placeholder={'Enter your message '}/></div>
             <div><button>Push</button></div>
         </form>
     )

@@ -2,24 +2,23 @@ import React from "react";
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post"
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthCreator, requiredField} from "../../../utils/validation/validators";
+import {Textarea} from "../../common/FormsControls/FormsControls";
 
 
 type postDataType = {
     id: number;
     message: string;
     likeCount: number;
-
-
 }
 
 type postDataTypeProps = {
+    newMyPost: string;
     postData: Array<postDataType>;
-    newPostText: string;
-    addPost: (newMyPost: string) => void
-
-
+    addPost: (values: string) => void
 }
 
+const maxLength10 = maxLengthCreator(10)
 
 function MyPosts(props: postDataTypeProps) {
     let postDataMap = props.postData.map(postDataProps => {
@@ -28,12 +27,13 @@ function MyPosts(props: postDataTypeProps) {
         )
     })
 
-    const addNewMyPost = (values: any) => {
+    const addNewMyPost = (values: postDataTypeProps) => {
+        debugger
         props.addPost(values.newMyPost)
-
+        alert('hi')
     }
-    return (
 
+    return (
         <div className={classes.postBlock}>
             <h3>My posts </h3>
             <div>
@@ -49,13 +49,18 @@ function MyPosts(props: postDataTypeProps) {
 const MyPostForm = (props: InjectedFormProps<postDataTypeProps>) => {
     return (
         <form onSubmit={props.handleSubmit}>
-                    <Field component = 'textarea' name={'newMyPost'} placeholder={'enter you message'}/>
+                    <Field component = {Textarea}
+                           name={'newMyPost'}
+                           placeholder={'enter you message'}
+                           validate={[requiredField, maxLength10]}
+                    />
             <div>
-                <button>Add post</button>
+                <button type={'submit'}>Add post</button>
             </div>
         </form>
     )
 }
+
 const MyPostFormRedux = reduxForm<postDataTypeProps>({
     form: 'addMyPostForm'
 })(MyPostForm)

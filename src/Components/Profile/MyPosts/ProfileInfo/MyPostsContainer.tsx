@@ -8,6 +8,7 @@ let mapStateToProps = (state: StateType)=> {
     return {
         postData: state.profilePage.postData,
         newPostText: state.profilePage.newPostText,
+        newMyPost: state.profilePage.newMyPost
     }
 }
 
