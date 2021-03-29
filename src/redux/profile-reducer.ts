@@ -28,7 +28,8 @@ export type UserProfileType = {
     photos: PhotoUserProfileType
     userId: number,
     isAuth: boolean,
-    newMyPost: string
+    newMyPost: string,
+
 }
 
 type PostType = {

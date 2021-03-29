@@ -19,7 +19,8 @@ type PathParamType = {
 type MapStateToPropsType = {
     profile: UserProfileType | null,
     status: string,
-    authorizedUserId: number
+    authorizedUserId: number,
+    isAuth: boolean
 
 }
 
@@ -54,7 +55,8 @@ class ProfileContainer extends React.Component<OwnPropsType> {
 let mapStateToProps = (state: RootStateReduxType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
-    authorizedUserId: state.auth.id,
+    authorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
 
 })
 export default compose<React.ComponentType>(

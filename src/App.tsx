@@ -20,6 +20,7 @@ type PropsType = {
 
 function App() {
 
+    // @ts-ignore
     return (
 
         <div className="App-wrapper">
