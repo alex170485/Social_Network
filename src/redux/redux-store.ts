@@ -5,6 +5,7 @@ import users_reducer from "./users_reducer";
 import authReducer from "./auth-reduser";
 import thunk from 'redux-thunk'
 import { reducer as formReducer } from 'redux-form'
+import {appReducer} from "./App-reducer";
 
 
 /*созщдаем объект с ключами свойство: значение. Сюда вносятся все наши венки проекта*/
@@ -13,7 +14,8 @@ let RootReducer = combineReducers({
     dialogsPage: dialogsReducer,
     usersPage: users_reducer,
     auth: authReducer,
-    form: formReducer
+    form: formReducer,
+    appPage: appReducer
 });
 
 export type RootStateReduxType = ReturnType<typeof RootReducer>

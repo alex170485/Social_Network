@@ -3,8 +3,8 @@ import Header from "./Header";
 import axios from "axios";
 import {connect} from "react-redux";
 import {RootStateReduxType} from "../../redux/redux-store";
-import {authMyThunk, logOutThunk, setAuthUserData} from "../../redux/auth-reduser";
-import {getAuthMy} from "../api/api";
+import {logOutThunk,} from "../../redux/auth-reduser";
+
 
 type MapStateToPropsType = {
     login: string,
@@ -12,16 +12,15 @@ type MapStateToPropsType = {
 
 }
 type MapDispatchToPropsType = {
-    // setAuthUserData:(id: number, email: string, login: string) => void
-    authMyThunk: () =>void
+    // authMyThunk: () =>void
     logOutThunk: () => void
 }
 type HeaderPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class HeaderContainer extends React.Component<HeaderPropsType> {
-    componentDidMount() {
-       this.props.authMyThunk()
-    }
+    // componentDidMount() {
+    //    this.props.authMyThunk()
+    // }
 
     render() {
         return <Header login={this.props.login}
@@ -35,4 +34,4 @@ let mapStateToProps = (state: RootStateReduxType) => ({
     login: state.auth.login
 })
 
-export default connect(mapStateToProps, {authMyThunk, logOutThunk}) (HeaderContainer)
+export default connect(mapStateToProps, {logOutThunk}) (HeaderContainer)

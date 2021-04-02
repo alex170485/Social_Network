@@ -10,15 +10,15 @@ export type authStateType = {
     login: string | null
     isAuth: boolean
 }
-let initialState:authStateType = {
-    id:null,
+let initialState: authStateType = {
+    id: null,
     login: null,
     email: null,
     isAuth: false
 }
 
 const authReducer = (state: authStateType = initialState, action: any) => {
-    switch (action.type){
+    switch (action.type) {
         case SET_USER_DATA: {
             return {
                 ...state,
@@ -27,24 +27,22 @@ const authReducer = (state: authStateType = initialState, action: any) => {
         }
         default:
             return state
+    }
+}
+export const authMyThunk = () =>  (dispatch: any) => {
+return getAuthMy()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                let {id, email, login} = response.data.data;
+                dispatch(setAuthUserData(id, email, login, true))
+            }
+        })
+}
 
-    }
-}
-export const authMyThunk = () => {
-    return (dispatch: any) => {
-        getAuthMy()
-            .then(response => {
-                if(response.data.resultCode === 0) {
-                    let {id, email, login} = response.data.data;
-                    dispatch(setAuthUserData(id, email, login, true))
-                }
-            })
-    }
-}
-export const loginThunk = (email: string , password: string , rememberMe: boolean) => {
-    return (dispatch: any) => {
+
+export const loginThunk = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
         login(email, password, rememberMe)
-            .then (response => {
+            .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(authMyThunk())
                 } else {
@@ -53,18 +51,19 @@ export const loginThunk = (email: string , password: string , rememberMe: boolea
                 }
             })
     }
-}
-export const logOutThunk = () => {
-    return (dispatch: any) => {
+
+export const logOutThunk = () => (dispatch: any) => {
         logOut()
-            .then (response => {
+            .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(setAuthUserData(null, null, null, false))
                 }
             })
     }
-}
 
-export const setAuthUserData = (userId: number | null, email: string | null , login: string | null , isAuth: boolean) => ({type:SET_USER_DATA, payload: {userId,email,login, isAuth} })
+export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
+    type: SET_USER_DATA,
+    payload: {userId, email, login, isAuth}
+})
 
 export default authReducer

@@ -81,10 +81,14 @@ export type UsersType = {
     followThunk:(userId:number) => void
     unfollowThunk:(userId: number) => void
 }
+type AppType = {
+    initialized: boolean
+}
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     usersPage: UsersType
+    app: AppType
 }
 export type storeType = {
     _state: StateType

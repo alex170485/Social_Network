@@ -1,43 +1,65 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import NavBar from "./Components/NavBar/NavBar";
-import {Route} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
 import Music from "./Components/Music/Music";
 import News from "./Components/News/News";
 import Settings from "./Components/Settings/Settings";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
-import {StoreReduxType} from "./redux/redux-store";
 import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContainer from './Components/Profile/ProfileContainer';
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
+import {connect} from "react-redux";
+import {compose} from "redux";
+import {initializeAppThunk} from "./redux/App-reducer";
+import {RootStateReduxType} from "./redux/redux-store";
+import Preloader from "./Components/common/Preloader/Preloader";
 
 
 type PropsType = {
-    dispatch: any
-    store: StoreReduxType
+    initializeAppThunk: () =>void
+    initialized: boolean
 }
 
-function App() {
+class App extends React.Component<PropsType>{
+    componentDidMount() {
+        this.props.initializeAppThunk()
+    }
 
-    // @ts-ignore
-    return (
 
-        <div className="App-wrapper">
-            <HeaderContainer/>
-            <NavBar/>
-            <div className='App-wrapper-content'>
-                {/*изменил метод отрисовки с component на render*/}
-                <Route render={() => <ProfileContainer/>} path={'/profile/:userId?'}/>
-                <Route render={() => <DialogsContainer/>} path={'/dialogs'}/>
-                <Route render={() => <UsersContainer/>} path={'/users'}/>
-                <Route render={() => <Music/>} path={'/music'}/>
-                <Route render={() => <Login/>} path={'/login'}/>
-                <Route render={() => <News/>} path={'/news'}/>
-                <Route render={() => <Settings/>} path={'/settings'}/>
+
+    render() {
+
+        if (!this.props.initialized) {
+            return <Preloader/>
+        }
+
+        return (
+            <div className="App-wrapper">
+                <HeaderContainer/>
+                <NavBar/>
+                <div className='App-wrapper-content'>
+                    {/*изменил метод отрисовки с component на render*/}
+                    <Route render={() => <ProfileContainer/>} path={'/profile/:userId?'}/>
+                    <Route render={() => <DialogsContainer/>} path={'/dialogs'}/>
+                    <Route render={() => <UsersContainer/>} path={'/users'}/>
+                    <Route render={() => <Music/>} path={'/music'}/>
+                    <Route render={() => <Login/>} path={'/login'}/>
+                    <Route render={() => <News/>} path={'/news'}/>
+                    <Route render={() => <Settings/>} path={'/settings'}/>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
+type MapStateToPropsType = {
+    initialized: boolean
+}
+let mapStateToProps = (state: RootStateReduxType): MapStateToPropsType => ({
+  initialized: state.appPage.initialized
+})
 
-export default App;
+export default compose<React.ComponentType> (
+    withRouter,
+    connect (mapStateToProps, {initializeAppThunk})) (App);
