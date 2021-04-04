@@ -28,7 +28,6 @@ export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS});
 
 export const initializeAppThunk = () => (dispatch: any) => {
     let promise = dispatch(authMyThunk())
-    debugger
     promise.then(()=> {
         dispatch(initializedSuccess())
     })
