@@ -20,7 +20,8 @@ type postDataTypeProps = {
 
 const maxLength10 = maxLengthCreator(10)
 
-function MyPosts(props: postDataTypeProps) {
+const MyPosts =React.memo( (props: postDataTypeProps) => {
+    console.log('Render')
     let postDataMap = props.postData.map(postDataProps => {
         return (
             <Post message={postDataProps.message} likeCount={postDataProps.likeCount} id={postDataProps.id}/>
@@ -43,7 +44,7 @@ function MyPosts(props: postDataTypeProps) {
             </div>
         </div>
     );
-}
+});
 
 const MyPostForm = (props: InjectedFormProps<postDataTypeProps>) => {
     return (
