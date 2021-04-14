@@ -29,37 +29,32 @@ const authReducer = (state: authStateType = initialState, action: any) => {
             return state
     }
 }
-export const authMyThunk = () =>  (dispatch: any) => {
-return getAuthMy()
-        .then(response => {
+export const authMyThunk = () => async (dispatch: any) => {
+    let response = await getAuthMy()
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data;
                 dispatch(setAuthUserData(id, email, login, true))
             }
-        })
+        }
+
+
+
+export const loginThunk = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
+    let response = await login(email, password, rememberMe)
+            if (response.data.resultCode === 0) {
+                dispatch(authMyThunk())
+            } else {
+                let message = response.data.messages > 0 ? response.data.messages[0] : 'some error'
+                dispatch(stopSubmit('login', {_error: message}))
+            }
+        }
+
+export const logOutThunk = () => async (dispatch: any) => {
+    let response = await logOut()
+            if (response.data.resultCode === 0) {
+                dispatch(setAuthUserData(null, null, null, false))
+            }
 }
-
-
-export const loginThunk = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
-        login(email, password, rememberMe)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(authMyThunk())
-                } else {
-                    let message = response.data.messages > 0 ? response.data.messages[0] : 'some error'
-                    dispatch(stopSubmit('login', {_error: message}))
-                }
-            })
-    }
-
-export const logOutThunk = () => (dispatch: any) => {
-        logOut()
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(setAuthUserData(null, null, null, false))
-                }
-            })
-    }
 
 export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
     type: SET_USER_DATA,
